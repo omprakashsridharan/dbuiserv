@@ -9,6 +9,7 @@ func SetupRoutes() *gin.Engine {
 		api.POST("/connect", Connect)
 		api.GET("/:id/databases", GetDatabases)
 		api.GET("/:id/databases/:database/tables", GetTables)
+		api.GET("/:id/databases/:database/tables/:table/data", GetTableData)
 	}
 	return r
 }

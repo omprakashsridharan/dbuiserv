@@ -46,3 +46,16 @@ func GetTables(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Invalid connection id"})
 	}
 }
+
+func GetTableData(c *gin.Context) {
+	dbConnectionId := c.Param("id")
+	database := c.Param("database")
+	table := c.Param("table")
+	dbConnection := GetConnection(dbConnectionId)
+	if dbConnection != nil {
+		result := (*dbConnection).GetTableData(database, table)
+		c.JSON(http.StatusOK, gin.H{"data": result})
+	} else {
+		c.JSON(http.StatusInternalServerError, gin.H{"message": "Invalid connection id"})
+	}
+}
